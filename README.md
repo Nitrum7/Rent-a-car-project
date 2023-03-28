@@ -12,12 +12,16 @@ Razdelenie - WebApp:
 
 Stupka 1
 - създаваме си всички Class Library и Web app с индивидуални контролери
+
 Stupka 2
 - правите референции: Models(NameofProekt.Common) Data(Models,NameofProekt.Common), Services(Data,Models,ViewModels,NameofProekt.Common),ViewModels(Models,NameofProekt.Common),Web(Всичко)
+
 Stupka 3
 - създаваме и попълваме моделите
+
 Stupka 4
 - попълване на AppDbContext 
 - пускаме миграции и оправяме грешките
+
 Stupka 5
 - конектион стринг правиш за всеки един от екипа
