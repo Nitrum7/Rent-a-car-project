@@ -14,7 +14,8 @@ Razdelenie - Class Library създаваме:
 5-NameofProekt.Common- static GlobalConstants (роли, константи)
 
 Razdelenie - WebApp:
--1-Web-controlers
+
+1-Web-controlers
 
 Stupka 1
 - създаваме си всички Class Library и Web app с индивидуални контролери
