@@ -2,13 +2,13 @@
 M13 - Project:
 
 Razdelenie - Class Library създаваме:
-1-Modeles
-2-ViewModels
-3-Data-Migrations,DbContext
-4-Services-Interfeices
-5-NameofProekt.Common- static GlobalConstants (роли, константи)
+-1-Modeles
+-2-ViewModels
+-3-Data-Migrations,DbContext
+-4-Services-Interfeices
+-5-NameofProekt.Common- static GlobalConstants (роли, константи)
 Razdelenie - WebApp:
-1-Web-controlers
+-1-Web-controlers
 
 Stupka 1
 - създаваме си всички Class Library и Web app с индивидуални контролери
