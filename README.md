@@ -2,7 +2,7 @@
 M13 - Project:
 
 Razdelenie - Class Library създаваме:
-1-Modles
+1-Modeles
 2-ViewModels
 3-Data-Migrations,DbContext
 4-Services-Interfeices
