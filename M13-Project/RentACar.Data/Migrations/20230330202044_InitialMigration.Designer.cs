@@ -10,7 +10,7 @@ using RentACar.Data;
 namespace RentACar.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230329184126_InitialMigration")]
+    [Migration("20230330202044_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -276,15 +276,10 @@ namespace RentACar.Data.Migrations
                     b.Property<decimal>("PricePerDay")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("Year")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Vehicles");
                 });
@@ -349,13 +344,6 @@ namespace RentACar.Data.Migrations
                     b.HasOne("RentACar.Models.Vehicle", "Vehicle")
                         .WithMany("Requests")
                         .HasForeignKey("VehicleId");
-                });
-
-            modelBuilder.Entity("RentACar.Models.Vehicle", b =>
-                {
-                    b.HasOne("RentACar.Models.User", null)
-                        .WithMany("Vehicles")
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

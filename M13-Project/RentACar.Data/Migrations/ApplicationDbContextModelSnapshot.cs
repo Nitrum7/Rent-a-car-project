@@ -274,15 +274,10 @@ namespace RentACar.Data.Migrations
                     b.Property<decimal>("PricePerDay")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("Year")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Vehicles");
                 });
@@ -347,13 +342,6 @@ namespace RentACar.Data.Migrations
                     b.HasOne("RentACar.Models.Vehicle", "Vehicle")
                         .WithMany("Requests")
                         .HasForeignKey("VehicleId");
-                });
-
-            modelBuilder.Entity("RentACar.Models.Vehicle", b =>
-                {
-                    b.HasOne("RentACar.Models.User", null)
-                        .WithMany("Vehicles")
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

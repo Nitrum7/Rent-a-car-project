@@ -14,6 +14,5 @@
         public string LastName { get; set; }
         public string PersonalNumber { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
-        public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }
