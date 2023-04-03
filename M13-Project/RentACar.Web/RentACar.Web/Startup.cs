@@ -10,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using RentACar.Data;
 using RentACar.Data.Seeding;
 using RentACar.Models;
+using RentACar.Services;
+using RentACar.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +47,8 @@ namespace RentACar.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
-          
+            services.AddTransient < IVehiclesService, VehiclesServiceL>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
