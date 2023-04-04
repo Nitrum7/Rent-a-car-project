@@ -20,9 +20,9 @@ namespace RentACar.ViewModels.Vehicles
         public string Model { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{yyyy-MM}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{yyyy-MMMM}", ApplyFormatInEditMode = true)]
         [YearAfter1886Validation]
-        [Display(Name = "Model")]
+        [Display(Name = "Year")]
         public DateTime Year { get; set; }
         [Required]
         [Range(1, 12)]
@@ -32,6 +32,7 @@ namespace RentACar.ViewModels.Vehicles
         public string Description { get; set; }
         [Required]
         [Range(30, 100000)]
+        [Display(Name = "Price per day")]
         public decimal PricePerDay { get; set; }
     }
 }

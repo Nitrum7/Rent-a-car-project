@@ -22,6 +22,15 @@ namespace RentACar.Services
         {
             this.context = context;
         }
+
+        public async Task DeleteVehicleByIdAsync(string id)
+        {
+            Vehicle car = await context.Vehicles.FindAsync(id);
+            car.Requests.Clear();
+            context.Vehicles.Remove(car);
+            await context.SaveChangesAsync();
+        }
+
         public async Task<IndexVehiclesVM> GetIndexVehiclesAsync(int page = 1, int count = 10)
         {
             IndexVehiclesVM model = new IndexVehiclesVM();
@@ -76,7 +85,7 @@ namespace RentACar.Services
                     Id = car.Id,
                     Brand = car.Brand,
                     Model = car.Model,
-                    Year = car.Year.ToString("yyyy MMMM"),
+                    Year = car.Year.ToShortDateString(),
                     PassengerSeats = car.PassengerSeats.ToString(),
                     Description = car.Description,
                     PricePerDay = car.PricePerDay.ToString(),
@@ -84,6 +93,40 @@ namespace RentACar.Services
             }
 
             return model;
+        }
+
+        public async Task<EditVehicleVM> GetVehicleToEditByIdAsync(string id)
+        {
+            Vehicle car = await context.Vehicles.FindAsync(id);
+            EditVehicleVM model = null;
+            if (car != null)
+            {
+                model = new EditVehicleVM()
+                {
+                    Id = car.Id,
+                    Brand = car.Brand,
+                    Model = car.Model,
+                    PassengerSeats = car.PassengerSeats,
+                    Description = car.Description,
+                    PricePerDay = car.PricePerDay,
+                    Year = car.Year,
+                };
+            }
+            return model;
+        }
+
+        public async Task UpdateVehicleAsync(EditVehicleVM model)
+        {
+            Vehicle car = await context.Vehicles.FindAsync(model.Id);
+
+            car.Brand = model.Brand;
+            car.Model = model.Model;
+            car.PassengerSeats = model.PassengerSeats;
+            car.Description = model.Description;
+            car.Year = model.Year;
+            car.PricePerDay = model.PricePerDay;
+            context.Vehicles.Update(car);
+            await context.SaveChangesAsync();
         }
 
 
