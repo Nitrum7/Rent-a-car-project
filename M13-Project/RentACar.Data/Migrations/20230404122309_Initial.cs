@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RentACar.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,8 @@ namespace RentACar.Data.Migrations
                     Year = table.Column<DateTime>(nullable: false),
                     PassengerSeats = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    PricePerDay = table.Column<decimal>(nullable: false)
+                    PricePerDay = table.Column<decimal>(nullable: false),
+                    IsFreeOnDate = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

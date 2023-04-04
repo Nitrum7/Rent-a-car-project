@@ -8,6 +8,6 @@ namespace RentACar.Services.Contracts
 {
     public interface IVehiclesService
     {
-        Task<IndexVehiclesViewModel> GetIndexVehiclesAsync(int page = 1, int count = 10);
+        Task<IndexVehiclesVM> GetIndexVehiclesAsync(int page = 1, int count = 10);
     }
 }

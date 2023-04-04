@@ -1,9 +1,9 @@
 ﻿namespace RentACar.ViewModels.Shared
 {
     using System;
-    public class PagingViewModel
+    public class PagingVM
     {
-        public PagingViewModel(int itemsPerPage = 10, string action = "Index")
+        public PagingVM(int itemsPerPage = 10, string action = "Index")
         {
             this.ItemsPerPage = itemsPerPage;
             this.Action = action;

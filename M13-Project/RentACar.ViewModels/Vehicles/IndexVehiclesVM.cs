@@ -5,8 +5,8 @@ using System.Text;
 
 namespace RentACar.ViewModels.Vehicles
 {
-    public class IndexVehiclesViewModel:PagingViewModel
+    public class IndexVehiclesVM:PagingVM
     {
-        public ICollection<IndexVehicleViewModel> Vehicles { get; set; }
+        public ICollection<IndexVehicleVM> Vehicles { get; set; }
     }
 }

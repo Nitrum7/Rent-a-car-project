@@ -47,7 +47,8 @@ namespace RentACar.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddTransient < IVehiclesService, VehiclesServiceL>();
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient < IVehiclesService, VehiclesService>();
 
         }
 

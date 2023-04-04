@@ -265,6 +265,9 @@ namespace RentACar.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsFreeOnDate")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 

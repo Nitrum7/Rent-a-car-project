@@ -21,6 +21,7 @@
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseLazyLoadingProxies();
+            
         }
     }
 }
