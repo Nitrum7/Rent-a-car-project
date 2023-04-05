@@ -6,6 +6,7 @@ using RentACar.Common;
 using RentACar.Data;
 using RentACar.Models;
 using RentACar.Services.Contracts;
+using RentACar.ViewModels.Requests;
 using RentACar.ViewModels.Users;
 using RentACar.ViewModels.Vehicles;
 using System;
@@ -169,6 +170,25 @@ namespace RentACar.Services
                     BrandModelPriceSeats = $"{x.Brand} - {x.Model} - {x.PricePerDay} лв - {x.PassengerSeats} seats",
                 }).ToListAsync();
             return new SelectList(vehicles, "Id", "BrandModelPriceSeats");
+        }
+        public async Task<SelectList> GetVehiclesSelectListAsyncGaga(CreateRequestVM model)
+        {
+            if (model.StartDate >= DateTime.UtcNow&&model.StartDate<model.EndDate)
+            {
+                List<SelectListVehicleVM> vehicles = await this.context.Vehicles
+                .Where(x => x.Requests.All((r => (r.StartDate > model.StartDate && r.StartDate > model.EndDate) || (r.EndDate < model.StartDate && r.EndDate < model.EndDate) || ()))
+                .Select(x => new SelectListVehicleVM()
+                {
+                    Id = x.Id,
+                    BrandModelPriceSeats = $"{x.Brand} - {x.Model} - {x.PricePerDay} лв - {x.PassengerSeats} seats",
+                }).ToListAsync();
+                return new SelectList(vehicles, "Id", "BrandModelPriceSeats");
+            }
+            else
+            {
+                return null;
+            }
+            
         }
     }
 }

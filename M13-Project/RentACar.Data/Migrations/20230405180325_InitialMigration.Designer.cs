@@ -10,8 +10,8 @@ using RentACar.Data;
 namespace RentACar.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230404122309_Initial")]
-    partial class Initial
+    [Migration("20230405180325_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -278,6 +278,9 @@ namespace RentACar.Data.Migrations
 
                     b.Property<decimal>("PricePerDay")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Year")
                         .HasColumnType("datetime2");
