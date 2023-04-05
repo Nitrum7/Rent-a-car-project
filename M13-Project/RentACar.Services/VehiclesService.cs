@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RentACar.Common;
 using RentACar.Data;
@@ -8,6 +10,7 @@ using RentACar.ViewModels.Users;
 using RentACar.ViewModels.Vehicles;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +50,7 @@ namespace RentACar.Services
                     Model = x.Model,
                     PricePerDay = x.PricePerDay.ToString(),
                     Year = x.Year > DateTime.Now.AddYears(-150) ? x.Year.ToString("yyyy MMMM") : "-",
+                    Url = x.Url,
                 })
                 .ToListAsync();
 
@@ -58,6 +62,8 @@ namespace RentACar.Services
 
         public async Task CreateVehicleAsync(CreateVehiclesVM model)
         {
+            model.Url = await ImageToStringAsync(model.Picture);
+
             Vehicle car = new Vehicle()
             {   
                 Brand = model.Brand,
@@ -66,10 +72,31 @@ namespace RentACar.Services
                 PassengerSeats = model.PassengerSeats,
                 Description = model.Description,
                 PricePerDay = model.PricePerDay,
+                Url = model.Url
             };
 
             await context.Vehicles.AddAsync(car);
             await context.SaveChangesAsync();
+        }
+
+        private async Task<string> ImageToStringAsync(IFormFile file)
+        {
+            List<string> imageExtensions = new List<string>() { ".JPG", ".BMP", ".PNG" };
+
+
+            if (file != null) // check if the user uploded something
+            {
+                var extension = Path.GetExtension(file.FileName); //get file extension
+                if (imageExtensions.Contains(extension.ToUpperInvariant()))
+                {
+                    using var dataStream = new MemoryStream();
+                    await file.CopyToAsync(dataStream);
+                    byte[] imageBytes = dataStream.ToArray();
+                    string base64String = Convert.ToBase64String(imageBytes);
+                    return base64String;
+                }
+            }
+            return null;
         }
 
         public async Task<IndexVehicleVM> GetVehicleByIdAsync(string id)
@@ -89,6 +116,7 @@ namespace RentACar.Services
                     PassengerSeats = car.PassengerSeats.ToString(),
                     Description = car.Description,
                     PricePerDay = car.PricePerDay.ToString(),
+                    Url = car.Url,
                 };
             }
 
@@ -110,6 +138,7 @@ namespace RentACar.Services
                     Description = car.Description,
                     PricePerDay = car.PricePerDay,
                     Year = car.Year,
+                    Url = car.Url,
                 };
             }
             return model;
@@ -125,10 +154,21 @@ namespace RentACar.Services
             car.Description = model.Description;
             car.Year = model.Year;
             car.PricePerDay = model.PricePerDay;
+            car.Url = model.Url;
             context.Vehicles.Update(car);
             await context.SaveChangesAsync();
         }
 
-
+        public async Task<SelectList> GetVehiclesSelectListAsync()
+        {
+            List<SelectListVehicleVM> vehicles = await this.context.Vehicles
+                .Where(x => x.IsFreeOnDate == true)
+                .Select(x => new SelectListVehicleVM()
+                {
+                    Id = x.Id,
+                    BrandModelPriceSeats = $"{x.Brand} - {x.Model} - {x.PricePerDay} лв - {x.PassengerSeats} seats",
+                }).ToListAsync();
+            return new SelectList(vehicles, "Id", "BrandModelPriceSeats");
+        }
     }
 }

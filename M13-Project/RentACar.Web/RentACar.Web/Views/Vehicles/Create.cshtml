@@ -12,7 +12,7 @@
     <div class="col-lg-8 col-xl-6">
         <div class="card rounded-3" style="background-color:#F0F2F5">
             <div class="card-body p-4 p-md-5">
-                <form asp-controller="Vehicles" asp-action="Create" method="post">
+                <form asp-controller="Vehicles" asp-action="Create" enctype="multipart/form-data" method="post">
                     <h4>Add a new vehicle.</h4>
                     <hr />
                     <div asp-validation-summary="All" class="text-danger"></div>
@@ -45,6 +45,11 @@
                         <label asp-for="Year"></label>
                         <input asp-for="Year" class="form-control" />
                         <span asp-validation-for=" Year" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Picture" class="form-label"></label>
+                        <input asp-for="Picture" type="file" class="form-control" />
+                        <span asp-validation-for="Picture" class="text-danger"></span>
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>

@@ -48,7 +48,8 @@ namespace RentACar.Web
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddTransient<IUsersService, UsersService>();
-            services.AddTransient < IVehiclesService, VehiclesService>();
+            services.AddTransient <IVehiclesService, VehiclesService>();
+            services.AddTransient<IRequestsService, RequestsService>();
 
         }
 

@@ -1,0 +1,54 @@
+﻿@model AcceptRequestVM
+
+@{
+    ViewData["Title"] = "Accept";
+}
+
+<h1>Accept</h1>
+
+<div>
+    <h4>Request</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrandOfVehicle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BrandOfVehicle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModelOfVehicle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ModelOfVehicle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PriceOfVehicle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PriceOfVehicle)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Accept" asp-route-id="@Model.Id">Accept</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

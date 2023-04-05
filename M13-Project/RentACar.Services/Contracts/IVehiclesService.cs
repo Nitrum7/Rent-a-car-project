@@ -1,4 +1,5 @@
-﻿using RentACar.ViewModels.Vehicles;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using RentACar.ViewModels.Vehicles;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,5 +15,6 @@ namespace RentACar.Services.Contracts
         Task<IndexVehicleVM> GetVehicleByIdAsync(string id);
         Task<EditVehicleVM> GetVehicleToEditByIdAsync(string id);
         Task UpdateVehicleAsync(EditVehicleVM model);
+        Task<SelectList> GetVehiclesSelectListAsync();
     }
 }

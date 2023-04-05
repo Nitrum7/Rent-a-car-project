@@ -16,6 +16,7 @@
         public int PassengerSeats { get; set; }
         public string Description { get; set; }
         public decimal PricePerDay { get; set; }
+        public string Url { get; set; }
         public bool IsFreeOnDate { get; set; } = true;
         public virtual ICollection<Request> Requests { get; set; }
     }

@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentACar.Data", "RentACar.Data\RentACar.Data.csproj", "{06F80F3C-581B-4D2F-B74A-9E96CDF4D8D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentACar.Data", "RentACar.Data\RentACar.Data.csproj", "{06F80F3C-581B-4D2F-B74A-9E96CDF4D8D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentACar.Models", "RentACar.Models\RentACar.Models.csproj", "{4873C7B8-C8EE-4FA4-9819-340149872060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentACar.Models", "RentACar.Models\RentACar.Models.csproj", "{4873C7B8-C8EE-4FA4-9819-340149872060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentACar.ViewModels", "RentACar.ViewModels\RentACar.ViewModels.csproj", "{DC3E96F5-29B0-47C3-BEA9-63963F37B06B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentACar.Services", "RentACar.Services\RentACar.Services.csproj", "{5061248B-F76D-4B54-9DCC-42EB18AFDCD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentACar.Services", "RentACar.Services\RentACar.Services.csproj", "{5061248B-F76D-4B54-9DCC-42EB18AFDCD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentACar.Web", "RentACar.Web\RentACar.Web\RentACar.Web.csproj", "{9FF0ED13-316E-46A3-954F-D9FC20056EDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentACar.Web", "RentACar.Web\RentACar.Web\RentACar.Web.csproj", "{9FF0ED13-316E-46A3-954F-D9FC20056EDA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentACar.Common", "RentACar.Common\RentACar.Common.csproj", "{7323ECDD-49E5-48FD-9076-1EE031E91D00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentACar.Common", "RentACar.Common\RentACar.Common.csproj", "{7323ECDD-49E5-48FD-9076-1EE031E91D00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{4873C7B8-C8EE-4FA4-9819-340149872060}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4873C7B8-C8EE-4FA4-9819-340149872060}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4873C7B8-C8EE-4FA4-9819-340149872060}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC3E96F5-29B0-47C3-BEA9-63963F37B06B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC3E96F5-29B0-47C3-BEA9-63963F37B06B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC3E96F5-29B0-47C3-BEA9-63963F37B06B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC3E96F5-29B0-47C3-BEA9-63963F37B06B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5061248B-F76D-4B54-9DCC-42EB18AFDCD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5061248B-F76D-4B54-9DCC-42EB18AFDCD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5061248B-F76D-4B54-9DCC-42EB18AFDCD3}.Release|Any CPU.ActiveCfg = Release|Any CPU

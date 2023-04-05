@@ -13,6 +13,12 @@
             <div class="card-body p-4 p-md-5">
                 <form asp-action="Edit">
                     <h4>Vehicle</h4>
+                    <hr />
+                    @if (Model.Url != null)
+                    {
+                        <img src="data:image/png; base64,@Html.DisplayFor(modelItem => Model.Url)" height="350" width="100%">
+                    }
+                    <hr />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Brand" class="control-label"></label>
