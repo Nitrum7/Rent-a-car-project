@@ -20,7 +20,6 @@ namespace RentACar.ViewModels.Vehicles
         public string Model { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{yyyy-MMMM}", ApplyFormatInEditMode = true)]
         [YearAfter1886Validation]
         [Display(Name = "Year")]
         public DateTime Year { get; set; }
