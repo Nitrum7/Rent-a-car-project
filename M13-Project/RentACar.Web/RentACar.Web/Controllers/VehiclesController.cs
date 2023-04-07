@@ -6,6 +6,7 @@
     using RentACar.ViewModels.Vehicles;
     using Microsoft.AspNetCore.Authorization;
     using RentACar.Common;
+    using RentACar.ViewModels.Requests;
 
     [Authorize]
     public class VehiclesController:Controller

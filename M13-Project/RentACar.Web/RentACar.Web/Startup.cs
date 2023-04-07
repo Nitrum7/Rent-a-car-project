@@ -50,6 +50,7 @@ namespace RentACar.Web
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient <IVehiclesService, VehiclesService>();
             services.AddTransient<IRequestsService, RequestsService>();
+            services.AddTransient<IValidatedVehiclesService, VehiclesValidatedService>();
 
         }
 

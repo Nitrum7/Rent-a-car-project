@@ -24,13 +24,12 @@ namespace RentACar.Web.Controllers
             var model = await requestsService.GetIndexRequestsAdminAsync(page, count);
             return View(model);
         }
-
+        
         // GET: Create
         public async Task<IActionResult> Create()
         {
             CreateRequestVM model = new CreateRequestVM();
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            model.VehiclesList = await this.vehiclesService.GetVehiclesSelectListAsync();
             return this.View(model);
         }
 
@@ -44,10 +43,8 @@ namespace RentACar.Web.Controllers
             if (this.ModelState.IsValid)
             {
                 await this.requestsService.CreateRequestAsync(model);
-                return this.RedirectToAction(nameof(this.Index));
+                return RedirectToAction("Index", "VehiclesValidatedControler", model);
             }
-
-            model.VehiclesList = await this.vehiclesService.GetVehiclesSelectListAsync();
             return this.View(model);
         }
 

@@ -10,6 +10,5 @@ namespace RentACar.ViewModels.Requests
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string User { get; set; }
-        public SelectList VehiclesList { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using RentACar.ViewModels.Requests;
 using RentACar.ViewModels.Requsts;
+using RentACar.ViewModels.Vehicles;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,5 +15,6 @@ namespace RentACar.Services.Contracts
         Task DeleteAsync(string id);
         Task<AcceptRequestVM> GetRequestToAcceptAsync(string id);
         Task AcceptRequestAsync(AcceptRequestVM model);
+        
     }
 }

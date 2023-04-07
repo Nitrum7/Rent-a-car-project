@@ -97,5 +97,6 @@ namespace RentACar.Services
                 PriceOfVehicle = request.Vehicle.PricePerDay,
             };
         }
+        
     }
 }
