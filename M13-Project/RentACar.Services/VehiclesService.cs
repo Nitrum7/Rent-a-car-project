@@ -34,6 +34,7 @@ namespace RentACar.Services
             context.Vehicles.Remove(car);
             await context.SaveChangesAsync();
         }
+
         public async Task<IndexVehiclesVM> GetIndexVehiclesAsync(int page = 1, int count = 10)
         {
             IndexVehiclesVM model = new IndexVehiclesVM();
@@ -55,16 +56,17 @@ namespace RentACar.Services
                 .ToListAsync();
 
             model.ElementsCount = await this.context.Vehicles.CountAsync();
+
+
             return model;
         }
-        
 
         public async Task CreateVehicleAsync(CreateVehiclesVM model)
         {
             model.Url = await ImageToStringAsync(model.Picture);
 
             Vehicle car = new Vehicle()
-            {   
+            {
                 Brand = model.Brand,
                 Model = model.Model,
                 Year = model.Year,
@@ -169,7 +171,27 @@ namespace RentACar.Services
                 }).ToListAsync();
             return new SelectList(vehicles, "Id", "BrandModelPriceSeats");
         }
-
-       
     }
 }
+
+//        public async Task<SelectList> GetVehiclesSelectListAsyncGaga(CreateRequestVM model)
+//        {
+//            if (model.StartDate >= DateTime.UtcNow&&model.StartDate<model.EndDate)
+//            {
+//                List<SelectListVehicleVM> vehicles = await this.context.Vehicles
+//                .Where(x => x.Requests.All((r => (r.StartDate > model.StartDate && r.StartDate > model.EndDate) || (r.EndDate < model.StartDate && r.EndDate < model.EndDate) || )
+//                .Select(x => new SelectListVehicleVM()
+//                {
+//                    Id = x.Id,
+//                    BrandModelPriceSeats = $"{x.Brand} - {x.Model} - {x.PricePerDay} лв - {x.PassengerSeats} seats",
+//                }).ToListAsync();
+//                return new SelectList(vehicles, "Id", "BrandModelPriceSeats");
+//            }
+//            else
+//            {
+//                return null;
+//            }
+
+//        }
+//    }
+//}
