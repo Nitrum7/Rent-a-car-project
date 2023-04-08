@@ -50,7 +50,7 @@ namespace RentACar.Services
                     Brand = x.Brand,
                     Model = x.Model,
                     PricePerDay = x.PricePerDay.ToString(),
-                    Year = x.Year > DateTime.Now.AddYears(-150) ? x.Year.ToString("yyyy MMMM") : "-",
+                    Year = x.Year.ToString("yyyy MMMM"),
                     Url = x.Url,
                 })
                 .ToListAsync();

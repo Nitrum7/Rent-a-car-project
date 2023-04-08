@@ -55,7 +55,8 @@ namespace RentACar.Web.Controllers
         // GET: Create
         public async Task<IActionResult> CreateSelectCar(CreateRequestVM createModel, BookVehicleVM bookModel)
         {
-            var model = await requestsService.GetIndexValidatedVehiclesAsync(createModel, bookModel.Page, bookModel.ItemsPerPage);
+            int items =  bookModel.ItemsPerPage = 10;
+            var model = await requestsService.GetIndexValidatedVehiclesAsync(createModel, bookModel.Page, items);
             model.RequestId = createModel.RequestId;
             return View(model);
         }
@@ -67,6 +68,22 @@ namespace RentACar.Web.Controllers
             await this.requestsService.UpdateRequestAsync(requestId,carId);
 
             return Redirect(nameof(Index));
+        }
+        //Car from the Book
+        public async Task<IActionResult> BookDetails(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var car = await vehiclesService.GetVehicleByIdAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            return View(car);
         }
 
         [HttpGet]
