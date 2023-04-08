@@ -21,9 +21,9 @@ namespace RentACar.Web.Controllers
         }
 
         // GET: RequestsAdmin
-        public async Task<IActionResult> Index(int page = 1, int count = 10)
+        public async Task<IActionResult> Index(int page = 1, int itemsPerPage = 10)
         {
-            var model = await requestsService.GetIndexRequestsAdminAsync(page, count);
+            var model = await requestsService.GetIndexRequestsAdminAsync(page, itemsPerPage);
             return View(model);
         }
 
@@ -55,8 +55,7 @@ namespace RentACar.Web.Controllers
         // GET: Create
         public async Task<IActionResult> CreateSelectCar(CreateRequestVM createModel, BookVehicleVM bookModel)
         {
-            int items =  bookModel.ItemsPerPage = 10;
-            var model = await requestsService.GetIndexValidatedVehiclesAsync(createModel, bookModel.Page, items);
+            var model = await requestsService.GetIndexValidatedVehiclesAsync(createModel, bookModel.Page, bookModel.ItemsPerPage);
             model.RequestId = createModel.RequestId;
             return View(model);
         }

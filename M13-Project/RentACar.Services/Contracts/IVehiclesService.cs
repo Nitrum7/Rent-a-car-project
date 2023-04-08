@@ -16,7 +16,5 @@ namespace RentACar.Services.Contracts
         Task<IndexVehicleVM> GetVehicleByIdAsync(string id);
         Task<EditVehicleVM> GetVehicleToEditByIdAsync(string id);
         Task UpdateVehicleAsync(EditVehicleVM model);
-        Task<SelectList> GetVehiclesSelectListAsync();
-
     }
 }

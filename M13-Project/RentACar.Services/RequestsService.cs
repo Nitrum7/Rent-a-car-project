@@ -22,11 +22,11 @@ namespace RentACar.Services
             this.context = context;
         }
 
-        public async Task<IndexRequestsVM> GetIndexRequestsAdminAsync(int page = 1, int count = 10)
+        public async Task<IndexRequestsVM> GetIndexRequestsAdminAsync(int page = 1, int itemsPerPage = 10)
         {
             IndexRequestsVM model = new IndexRequestsVM();
 
-            model.ItemsPerPage = count;
+            model.ItemsPerPage = itemsPerPage;
             model.Page = page;
             model.Requests = await this.context.Requests
                 .Skip((model.Page - 1) * model.ItemsPerPage)
@@ -99,7 +99,7 @@ namespace RentACar.Services
         public async Task AcceptRequestAsync(AcceptRequestVM model)
         {
             Request request = await this.context.Requests.FirstOrDefaultAsync(x => x.Id == model.Id);
-            request.Vehicle.IsFreeOnDate = false;
+            request.Vehicle.IsAccept = true;
 
             this.context.Update(request);
             await this.context.SaveChangesAsync();

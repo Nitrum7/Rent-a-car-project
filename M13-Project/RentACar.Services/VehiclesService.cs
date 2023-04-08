@@ -159,18 +159,6 @@ namespace RentACar.Services
             context.Vehicles.Update(car);
             await context.SaveChangesAsync();
         }
-
-        public async Task<SelectList> GetVehiclesSelectListAsync()
-        {
-            List<SelectListVehicleVM> vehicles = await this.context.Vehicles
-                .Where(x => x.IsFreeOnDate == true)
-                .Select(x => new SelectListVehicleVM()
-                {
-                    Id = x.Id,
-                    BrandModelPriceSeats = $"{x.Brand} - {x.Model} - {x.PricePerDay} лв - {x.PassengerSeats} seats",
-                }).ToListAsync();
-            return new SelectList(vehicles, "Id", "BrandModelPriceSeats");
-        }
     }
 }
 
