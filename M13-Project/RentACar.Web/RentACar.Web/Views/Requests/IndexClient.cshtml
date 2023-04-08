@@ -1,0 +1,53 @@
+﻿@model IndexClientRequestsVM
+
+<p id="my-p">
+    <a asp-action="Create" class="btn" style="background-color:darkorange">Create New</a>
+</p>
+
+<table class="table table-hover table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Start date
+            </th>
+            <th>
+                End date
+            </th>
+            <th>
+                Client
+            </th>
+            <th>
+                Vehicle
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Requests)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.User)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vehicle)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.IsAccept)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<partial name="_PagingPartial" />

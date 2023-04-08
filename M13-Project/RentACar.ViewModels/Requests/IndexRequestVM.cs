@@ -12,5 +12,6 @@ namespace RentACar.ViewModels.Requsts
         public string EndDate { get; set; }
         public string User { get; set; }
         public string Vehicle { get; set; }
+        public string IsAccept { get; set; }
     }
 }

@@ -81,7 +81,11 @@
             }
             return model;
         }
-
+        public async Task<User> GetUserById(string id)
+        {
+            User user = await context.Users.FindAsync(id);
+            return user;
+        }
         public async Task<IndexUserVM> GetUserByIdAsync(string id)
         {
             User user = await context.Users.FindAsync(id);

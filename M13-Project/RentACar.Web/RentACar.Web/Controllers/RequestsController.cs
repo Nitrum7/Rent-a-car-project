@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using RentACar.Data;
+using RentACar.Models;
 using RentACar.Services.Contracts;
 using RentACar.ViewModels.Requests;
 using RentACar.ViewModels.Vehicles;
 using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -13,20 +17,29 @@ namespace RentACar.Web.Controllers
     {
         private readonly IRequestsService requestsService;
         private readonly IVehiclesService vehiclesService;
+        private readonly ApplicationDbContext context;
+        private readonly IUsersService usersService;
 
-        public RequestsController(IRequestsService requestsService, IVehiclesService vehiclesService)
+        public RequestsController(IRequestsService requestsService, IVehiclesService vehiclesService, ApplicationDbContext context)
         {
             this.requestsService = requestsService;
             this.vehiclesService = vehiclesService;
+            this.context = context;
         }
 
         // GET: RequestsAdmin
-        public async Task<IActionResult> Index(int page = 1, int itemsPerPage = 10)
+        public async Task<IActionResult> Index( int page = 1, int itemsPerPage = 10)
         {
             var model = await requestsService.GetIndexRequestsAdminAsync(page, itemsPerPage);
             return View(model);
         }
-
+        //Get: ReguestsClient
+        public async Task<IActionResult> IndexClient(string id, int page = 1, int itemsPerPage = 10)
+        {
+            id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var model = await requestsService.GetIndexRequestsClientAsync(id,page, itemsPerPage);
+            return View(model);
+        }
         // GET: Create
         public async Task<IActionResult> Create()
         {
@@ -61,12 +74,15 @@ namespace RentACar.Web.Controllers
         }
 
         //Post
-        public async Task<IActionResult> Book(string requestId, string carId)
+        public async Task<IActionResult> BookForAdmin(string requestId, string carId)
         {
-
             await this.requestsService.UpdateRequestAsync(requestId,carId);
-
             return Redirect(nameof(Index));
+        }
+        public async Task<IActionResult> BookForClient(string requestId, string carId)
+        {
+            await this.requestsService.UpdateRequestAsync(requestId, carId);
+            return Redirect(nameof(IndexClient));
         }
         //Car from the Book
         public async Task<IActionResult> BookDetails(string id)

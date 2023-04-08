@@ -10,8 +10,8 @@ using RentACar.Data;
 namespace RentACar.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230408162625_UpdatedVehicle")]
-    partial class UpdatedVehicle
+    [Migration("20230408180451_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -164,6 +164,9 @@ namespace RentACar.Data.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsAccept")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -266,9 +269,6 @@ namespace RentACar.Data.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAccept")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");

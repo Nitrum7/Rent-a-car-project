@@ -25,10 +25,10 @@ namespace RentACar.Services
         public async Task<IndexRequestsVM> GetIndexRequestsAdminAsync(int page = 1, int itemsPerPage = 10)
         {
             IndexRequestsVM model = new IndexRequestsVM();
-
             model.ItemsPerPage = itemsPerPage;
             model.Page = page;
             model.Requests = await this.context.Requests
+                .Where(x=>x.IsAccept==false)
                 .Skip((model.Page - 1) * model.ItemsPerPage)
                 .Take(model.ItemsPerPage)
                 .Select(x => new IndexRequestVM()
@@ -41,7 +41,7 @@ namespace RentACar.Services
                 })
                 .ToListAsync();
 
-            model.ElementsCount = await this.context.Requests.CountAsync();
+            model.ElementsCount = await this.context.Requests.Where(x => x.IsAccept == false).CountAsync();
 
             return model;
         }
@@ -99,8 +99,7 @@ namespace RentACar.Services
         public async Task AcceptRequestAsync(AcceptRequestVM model)
         {
             Request request = await this.context.Requests.FirstOrDefaultAsync(x => x.Id == model.Id);
-            request.Vehicle.IsAccept = true;
-
+            request.IsAccept = true;
             this.context.Update(request);
             await this.context.SaveChangesAsync();
         }
@@ -130,6 +129,32 @@ namespace RentACar.Services
             request.Vehicle = vehicle;
             context.Update(request);
             await context.SaveChangesAsync();
+        }
+
+        public async Task<IndexClientRequestsVM> GetIndexRequestsClientAsync(string id, int page = 1, int itemsPerPage = 10)
+        {
+            IndexClientRequestsVM model = new IndexClientRequestsVM();
+            User user = await context.Users.FindAsync(id);
+            model.ItemsPerPage = itemsPerPage;
+            model.Page = page;
+            model.Requests = await this.context.Requests
+                .Where(x => x.User == user)
+                .Skip((model.Page - 1) * model.ItemsPerPage)
+                .Take(model.ItemsPerPage)
+                .Select(x => new IndexRequestVM()
+                {
+                    Id = x.Id,
+                    StartDate = x.StartDate > DateTime.Now.AddYears(-150) ? x.StartDate.ToString("dd MMMM yyyy") : "-",
+                    EndDate = x.EndDate > DateTime.Now.AddYears(-150) ? x.EndDate.ToString("dd MMMM yyyy") : "-",
+                    User = $"{x.User.FirstName} {x.User.LastName}",
+                    Vehicle = $"{x.Vehicle.Brand} {x.Vehicle.Model}",
+                    IsAccept = x.IsAccept == false ? "Pednding" : "Accepted",
+                }) 
+                .ToListAsync();
+
+            model.ElementsCount = await this.context.Requests.Where(x => x.User == user).CountAsync();
+
+            return model;
         }
     }
 }

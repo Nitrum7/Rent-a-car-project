@@ -11,6 +11,7 @@ namespace RentACar.Services.Contracts
     public interface IRequestsService
     {
         Task<IndexRequestsVM> GetIndexRequestsAdminAsync(int page = 1, int itemsPerPage = 10);
+        Task<IndexClientRequestsVM> GetIndexRequestsClientAsync(string id,int page = 1, int itemsPerPage = 10);
         Task<string> CreateRequestAsync(CreateRequestVM model);
 
         Task UpdateRequestAsync(string requestId, string carId);

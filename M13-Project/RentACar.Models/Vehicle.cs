@@ -17,7 +17,7 @@
         public string Description { get; set; }
         public decimal PricePerDay { get; set; }
         public string Url { get; set; }
-        public bool IsAccept { get; set; } = false;
+
         public virtual ICollection<Request> Requests { get; set; }
     }
 }

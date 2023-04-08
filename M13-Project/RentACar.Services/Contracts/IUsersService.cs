@@ -1,4 +1,5 @@
-﻿using RentACar.ViewModels.Users;
+﻿using RentACar.Models;
+using RentACar.ViewModels.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,5 +15,6 @@ namespace RentACar.Services.Contracts
         Task<EditUserVM> GetUserToEditByIdAsync(string id);
         Task<IndexUserVM> GetUserByIdAsync(string id);
         Task<IndexUsersVM> GetUsersAsync(int page = 1, int count = 10);
+        Task<User> GetUserById(string id);
     }
 }

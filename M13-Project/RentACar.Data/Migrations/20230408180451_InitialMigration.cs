@@ -60,8 +60,7 @@ namespace RentACar.Data.Migrations
                     PassengerSeats = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     PricePerDay = table.Column<decimal>(nullable: false),
-                    Url = table.Column<string>(nullable: true),
-                    IsFreeOnDate = table.Column<bool>(nullable: false)
+                    Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -182,7 +181,8 @@ namespace RentACar.Data.Migrations
                     VehicleId = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
+                    IsAccept = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

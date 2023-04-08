@@ -37,8 +37,15 @@
                     @Html.DisplayFor(modelItem => item.PricePerDay) лв
                 </td>
                 <td>
-                    <a asp-action="Book" asp-route-carId="@item.Id" asp-route-requestId="@Model.RequestId">Book</a> |
-                    <a asp-action="BookDetails" asp-route-id="@item.Id">Details</a> |
+                    @if(User.IsInRole("Admin"))
+                    {
+                        <a asp-action="BookForAdmin" asp-route-carId="@item.Id" asp-route-requestId="@Model.RequestId">Book</a>
+                    }
+                    @if(User.IsInRole("Client"))
+                    {
+                        <a asp-action="BookForClient" asp-route-carId="@item.Id" asp-route-requestId="@Model.RequestId">Book</a>
+                    }
+                    <a asp-action="BookDetails" asp-route-id="@item.Id">Details</a> 
                 </td>
             </tr>
         }

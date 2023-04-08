@@ -162,6 +162,9 @@ namespace RentACar.Data.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsAccept")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -264,9 +267,6 @@ namespace RentACar.Data.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAccept")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
