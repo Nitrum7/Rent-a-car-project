@@ -17,14 +17,11 @@ namespace RentACar.Web.Controllers
     {
         private readonly IRequestsService requestsService;
         private readonly IVehiclesService vehiclesService;
-        private readonly ApplicationDbContext context;
-        private readonly IUsersService usersService;
 
-        public RequestsController(IRequestsService requestsService, IVehiclesService vehiclesService, ApplicationDbContext context)
+        public RequestsController(IRequestsService requestsService, IVehiclesService vehiclesService)
         {
             this.requestsService = requestsService;
             this.vehiclesService = vehiclesService;
-            this.context = context;
         }
 
         // GET: RequestsAdmin

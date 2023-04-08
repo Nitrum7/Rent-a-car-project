@@ -29,6 +29,7 @@ namespace RentACar.Services
             model.Page = page;
             model.Requests = await this.context.Requests
                 .Where(x=>x.IsAccept==false)
+                .Where(x => x.Vehicle != null || x.VehicleId != null)
                 .Skip((model.Page - 1) * model.ItemsPerPage)
                 .Take(model.ItemsPerPage)
                 .Select(x => new IndexRequestVM()
@@ -41,7 +42,7 @@ namespace RentACar.Services
                 })
                 .ToListAsync();
 
-            model.ElementsCount = await this.context.Requests.Where(x => x.IsAccept == false).CountAsync();
+            model.ElementsCount = await this.context.Requests.Where(x => x.IsAccept == false).Where(x => x.Vehicle != null || x.VehicleId != null).CountAsync();
 
             return model;
         }
@@ -80,7 +81,7 @@ namespace RentACar.Services
                 EndDate = model.EndDate,
                 User = user,
             };
-
+            
             await this.context.Requests.AddAsync(request);
             await this.context.SaveChangesAsync();
             return request.Id;
@@ -126,8 +127,12 @@ namespace RentACar.Services
         {
             Request request = await this.context.Requests.FindAsync(requestId);
             Vehicle vehicle = this.context.Vehicles.Find(carId);
-            request.Vehicle = vehicle;
+            request.Vehicle = vehicle;           
             context.Update(request);
+            if (request.Vehicle == null)
+            {
+                context.Requests.Remove(request);
+            }
             await context.SaveChangesAsync();
         }
 
@@ -139,6 +144,7 @@ namespace RentACar.Services
             model.Page = page;
             model.Requests = await this.context.Requests
                 .Where(x => x.User == user)
+                .Where(x=>x.Vehicle!=null || x.VehicleId!=null)
                 .Skip((model.Page - 1) * model.ItemsPerPage)
                 .Take(model.ItemsPerPage)
                 .Select(x => new IndexRequestVM()
@@ -148,12 +154,11 @@ namespace RentACar.Services
                     EndDate = x.EndDate > DateTime.Now.AddYears(-150) ? x.EndDate.ToString("dd MMMM yyyy") : "-",
                     User = $"{x.User.FirstName} {x.User.LastName}",
                     Vehicle = $"{x.Vehicle.Brand} {x.Vehicle.Model}",
-                    IsAccept = x.IsAccept == false ? "Pednding" : "Accepted",
+                    IsAccept = x.IsAccept == false ? "Pending" : "Accepted",
                 }) 
                 .ToListAsync();
 
-            model.ElementsCount = await this.context.Requests.Where(x => x.User == user).CountAsync();
-
+            model.ElementsCount = await this.context.Requests.Where(x => x.User == user).Where(x => x.Vehicle != null || x.VehicleId != null).CountAsync();
             return model;
         }
     }
