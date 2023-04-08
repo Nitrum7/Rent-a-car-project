@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace RentACar.Services
 {
-    public class RequestsService:IRequestsService
+    public class RequestsService : IRequestsService
     {
         private readonly ApplicationDbContext context;
 
@@ -45,8 +45,32 @@ namespace RentACar.Services
 
             return model;
         }
+        public async Task<BookVehicleVM> GetIndexValidatedVehiclesAsync(CreateRequestVM createModel, int page = 1, int count = 10)
+        {
+            BookVehicleVM model = new BookVehicleVM();
 
-        public async Task CreateRequestAsync(CreateRequestVM model)
+            model.ItemsPerPage = count;
+            model.Page = page;
+            model.Vehicles = await this.context.Vehicles
+                .Where(x => x.Requests.All(r => (r.StartDate >= createModel.StartDate && r.EndDate <= createModel.StartDate) || (r.StartDate >= createModel.EndDate && r.EndDate <= createModel.EndDate)))
+                .Skip((model.Page - 1) * model.ItemsPerPage)
+                .Take(model.ItemsPerPage)
+                .Select(x => new IndexVehicleVM()
+                {
+                    Id = x.Id,
+                    Brand = x.Brand,
+                    Model = x.Model,
+                    PricePerDay = x.PricePerDay.ToString(),
+                    Year = x.Year > DateTime.Now.AddYears(-150) ? x.Year.ToString("yyyy MMMM") : "-",
+                    Url = x.Url,
+                })
+                .ToListAsync();
+
+            model.ElementsCount = await this.context.Vehicles
+                .Where(x => x.Requests.All(r => (r.StartDate >= createModel.StartDate && r.EndDate <= createModel.StartDate) || (r.StartDate >= createModel.EndDate && r.EndDate <= createModel.EndDate))).CountAsync();
+            return model;
+        }
+        public async Task<string> CreateRequestAsync(CreateRequestVM model)
         {
             User user = this.context.Users.FirstOrDefault(x => x.Id == model.User);
 
@@ -59,6 +83,7 @@ namespace RentACar.Services
 
             await this.context.Requests.AddAsync(request);
             await this.context.SaveChangesAsync();
+            return request.Id;
         }
 
         public async Task DeleteAsync(string id)
@@ -97,6 +122,14 @@ namespace RentACar.Services
                 PriceOfVehicle = request.Vehicle.PricePerDay,
             };
         }
-        
+
+        public async Task UpdateRequestAsync(string requestId, string carId)
+        {
+            Request request = await this.context.Requests.FindAsync(requestId);
+            Vehicle vehicle = this.context.Vehicles.Find(carId);
+            request.Vehicle = vehicle;
+            context.Update(request);
+            await context.SaveChangesAsync();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IndexVehiclesVM
+﻿@model BookVehicleVM
 
 <table class="table table-hover table-striped">
     <thead class="thead-dark">
@@ -37,6 +37,7 @@
                     @Html.DisplayFor(modelItem => item.PricePerDay) лв
                 </td>
                 <td>
+                    <a asp-action="Book" asp-route-carId="@item.Id" asp-route-requestId="@Model.RequestId">Book</a> |
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 </td>

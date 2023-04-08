@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RentACar.Services.Contracts;
 using RentACar.ViewModels.Requests;
+using RentACar.ViewModels.Vehicles;
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -24,11 +26,13 @@ namespace RentACar.Web.Controllers
             var model = await requestsService.GetIndexRequestsAdminAsync(page, count);
             return View(model);
         }
-        
+
         // GET: Create
         public async Task<IActionResult> Create()
         {
             CreateRequestVM model = new CreateRequestVM();
+            model.StartDate = DateTime.Now;
+            model.EndDate = DateTime.Now.AddDays(7);
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             return this.View(model);
         }
@@ -42,10 +46,27 @@ namespace RentACar.Web.Controllers
             model.User = userId;
             if (this.ModelState.IsValid)
             {
-                await this.requestsService.CreateRequestAsync(model);
-                return RedirectToAction("Index", "VehiclesValidatedControler", model);
+                model.RequestId = await this.requestsService.CreateRequestAsync(model);
+                return RedirectToAction("CreateSelectCar", model);
             }
             return this.View(model);
+        }
+
+        // GET: Create
+        public async Task<IActionResult> CreateSelectCar(CreateRequestVM createModel, BookVehicleVM bookModel)
+        {
+            var model = await requestsService.GetIndexValidatedVehiclesAsync(createModel, bookModel.Page, bookModel.ItemsPerPage);
+            model.RequestId = createModel.RequestId;
+            return View(model);
+        }
+
+        //Post
+        public async Task<IActionResult> Book(string requestId, string carId)
+        {
+
+            await this.requestsService.UpdateRequestAsync(requestId,carId);
+
+            return Redirect(nameof(Index));
         }
 
         [HttpGet]
