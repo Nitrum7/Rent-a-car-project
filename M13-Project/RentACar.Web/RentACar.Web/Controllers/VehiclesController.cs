@@ -19,9 +19,9 @@
             this.vehiclesService = vehiclesService;
         }
         // GET: Vehicles
-        public async Task<IActionResult> Index(int page = 1, int count = 10)
+        public async Task<IActionResult> Index(int page = 1, int itemsPerPage = 10)
         {
-            var model = await vehiclesService.GetIndexVehiclesAsync(page, count);
+            var model = await vehiclesService.GetIndexVehiclesAsync(page, itemsPerPage);
             return View(model);
         }
 

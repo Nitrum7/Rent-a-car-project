@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using RentACar.Common;
 using RentACar.Data;
 using RentACar.Models;
 using RentACar.Services.Contracts;
@@ -13,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace RentACar.Web.Controllers
 {
+    [Authorize]
     public class RequestsController : Controller
     {
         private readonly IRequestsService requestsService;
@@ -25,6 +28,7 @@ namespace RentACar.Web.Controllers
         }
 
         // GET: RequestsAdmin
+        [Authorize(Roles = GlobalConstants.AdminRole)]
         public async Task<IActionResult> Index( int page = 1, int itemsPerPage = 10)
         {
             var model = await requestsService.GetIndexRequestsAdminAsync(page, itemsPerPage);
@@ -71,6 +75,7 @@ namespace RentACar.Web.Controllers
         }
 
         //Post
+        [Authorize(Roles = GlobalConstants.AdminRole)]
         public async Task<IActionResult> BookForAdmin(string requestId, string carId)
         {
             await this.requestsService.UpdateRequestAsync(requestId,carId);
@@ -99,6 +104,7 @@ namespace RentACar.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.AdminRole)]
         public async Task<IActionResult> Accept(string id)
         {
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -108,6 +114,7 @@ namespace RentACar.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = GlobalConstants.AdminRole)]
         public async Task<IActionResult> Accept(AcceptRequestVM model)
         {
             if (ModelState.IsValid)
@@ -121,6 +128,7 @@ namespace RentACar.Web.Controllers
 
         //GET: Decline
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.AdminRole)]
         public async Task<IActionResult> Decline(string id)
         {
             await requestsService.DeleteAsync(id);

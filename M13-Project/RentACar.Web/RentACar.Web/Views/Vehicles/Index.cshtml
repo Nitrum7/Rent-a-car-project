@@ -2,9 +2,12 @@
 <script src="https://kit.fontawesome.com/0a4f4233e3.js" crossorigin="anonymous"></script>
 
 
-<p id="my-p">
+@if (User.IsInRole("Admin"))
+{
+    <p id="my-p">
     <a asp-action="Create" class="btn bg-warning">Create New</a>
 </p>
+}
 
 <table class="table table-hover table-striped">
     <thead class="thead-dark">
@@ -43,9 +46,16 @@
                     @Html.DisplayFor(modelItem => item.PricePerDay) лв
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a> |
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                    }
+                     |
                     <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i></a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash"></i></a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash"></i></a>
+                    }                    
                 </td>
             </tr>
         }

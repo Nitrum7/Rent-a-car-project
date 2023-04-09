@@ -26,9 +26,9 @@
         }
 
         // GET: Users
-        public async Task<IActionResult> Index(int page = 1, int count = 10)
+        public async Task<IActionResult> Index(int page = 1, int itemsPerPage = 10)
         {
-            var model = await usersService.GetUsersAsync(page, count);
+            var model = await usersService.GetUsersAsync(page, itemsPerPage);
             return View(model);
         }
 

@@ -52,9 +52,9 @@
             @Html.DisplayNameFor(model => model.Picture)
         </dt>
         <dd class="col-sm-10">
-            @if (Model.Picture != null)
+            @if (Model.Url != null)
             {
-                <img src="data:image/png;base64,@Html.DisplayFor(model => model.Picture)" height="100" width="250">
+                <img src="data:image/png;base64,@Html.DisplayFor(model => model.Url)" height="100" width="250">
             }
             else
             {
