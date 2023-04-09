@@ -34,7 +34,7 @@ namespace RentACar.Web.Controllers
             var model = await requestsService.GetIndexRequestsAdminAsync(page, itemsPerPage);
             return View(model);
         }
-        //Get: ReguestsClient
+        //Get: RequestsClient
         public async Task<IActionResult> IndexClient(string id, int page = 1, int itemsPerPage = 10)
         {
             id = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -66,7 +66,7 @@ namespace RentACar.Web.Controllers
             return this.View(model);
         }
 
-        // GET: Create
+        // GET: CreateSelectCar
         public async Task<IActionResult> CreateSelectCar(CreateRequestVM createModel, BookVehicleVM bookModel)
         {
             var model = await requestsService.GetIndexValidatedVehiclesAsync(createModel, bookModel.Page, bookModel.ItemsPerPage);
