@@ -1,7 +1,9 @@
 ﻿@model IndexClientRequestsVM
+<script src="https://kit.fontawesome.com/0a4f4233e3.js" crossorigin="anonymous"></script>
+
 
 <p id="my-p">
-    <a asp-action="Create" class="btn" style="background-color:darkorange">Create New</a>
+    <a asp-action="Create" class="btn bg-warning">Create New</a>
 </p>
 
 <table class="table table-hover table-striped">
@@ -50,4 +52,18 @@
         }
     </tbody>
 </table>
+<style>
+    body {
+        margin: auto;
+        background-color: whitesmoke;
+    }
+
+    h1 {
+        padding: 20px;
+    }
+
+    i {
+        color: #292929;
+    }
+</style>
 <partial name="_PagingPartial" />

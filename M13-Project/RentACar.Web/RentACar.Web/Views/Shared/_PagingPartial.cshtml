@@ -5,11 +5,11 @@
         <li style="margin-right:5px">
             <form id="paginationForm" asp-controller="@this.Context.Request.RouteValues["controller"].ToString()" asp-action="@Context.Request.RouteValues["action"].ToString()" method="post">
                 <select asp-for="ItemsPerPage" class="form-control border-dark" onchange="changeItemsPerPage();">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
+                    <option value="5" class="option text-dark  bg-warning">5</option>
+                    <option value="10" class="option text-dark bg-warning">10</option>
+                    <option value="20" class="option text-dark bg-warning">20</option>
+                    <option value="30" class="option text-dark bg-warning">30</option>
+                    <option value="50" class="option text-dark bg-warning">50</option>
                 </select>
                 <input type="submit" id="loginSubmit" style="visibility:hidden" />
             </form>
@@ -24,11 +24,11 @@
         {
             if (i > 0)
             {
-                <li class="page-item"><a class="page-link" asp-action="@Model.Action" asp-route-page="@i" asp-route-itemsPerPage="@Model.ItemsPerPage">@i</a></li>
+                <li class="page-item "><a class="page-link bg-warning text-white" asp-action="@Model.Action" asp-route-page="@i" asp-route-itemsPerPage="@Model.ItemsPerPage">@i</a></li>
             }
         }
         <li class="page-item active" aria-current="page">
-            <span class="page-link">
+            <span class="page-link bg-warning border-white">
                 @Model.Page
                 <span class="sr-only">(current)</span>
             </span>
@@ -37,7 +37,7 @@
         {
             if (i <= Model.PagesCount)
             {
-                <li class="page-item"><a class="page-link" asp-action="@Model.Action" asp-route-page="@i" asp-route-itemsPerPage="@Model.ItemsPerPage">@i</a></li>
+                <li class="page-item"><a class="page-link bg-warning text-white" asp-action="@Model.Action" asp-route-page="@i" asp-route-itemsPerPage="@Model.ItemsPerPage">@i</a></li>
             }
         }
         <li class="page-item @if(!Model.HasNextPage){<text>disabled</text>}">

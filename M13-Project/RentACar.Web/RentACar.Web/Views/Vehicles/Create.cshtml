@@ -4,12 +4,13 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Vehicle</h4>
+<div class="text-center">
+    <h1>Add</h1>
+    <h4>Vehicle</h4>
+</div>
 <hr />
 <div class="row d-flex justify-content-center align-items-center h-100">
-    <div class="col-lg-8 col-xl-6">
+    <div class="col-lg-9 col-xl-7">
         <div class="card rounded-3" style="background-color:#F0F2F5">
             <div class="card-body p-4 p-md-5">
                 <form asp-controller="Vehicles" asp-action="Create" enctype="multipart/form-data" method="post">
@@ -51,7 +52,7 @@
                         <input asp-for="Picture" type="file" class="form-control" />
                         <span asp-validation-for="Picture" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-warning">Add</button>
                 </form>
             </div>
         </div>
@@ -60,7 +61,22 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+<style>
+    body {
+        margin: auto;
+        background-color: whitesmoke;
+    }
+    .text-center > h4 {
+        margin: 0 auto;
+        text-align: center;
+        width: 100px;
+        color: whitesmoke;
+        border: 1px solid #292929;
+        padding: 5px;
+        border-radius: 10px;
+        background-color: #292929;
+    }
+</style>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

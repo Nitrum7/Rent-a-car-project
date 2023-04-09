@@ -4,9 +4,10 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>User</h4>
+<div class="text-center">
+    <h1>Create</h1>
+    <h4>User</h4>
+</div>
 <hr />
 <div class="row d-flex justify-content-center align-items-center h-100">
     <div class="col-lg-8 col-xl-6">
@@ -51,14 +52,14 @@
                         <input asp-for="Password" class="form-control" />
                         <span asp-validation-for=" Password" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-warning">Create</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-dark" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
@@ -66,3 +67,19 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+<style>
+    body {
+        margin: auto;
+        background-color: whitesmoke;
+    }
+    .text-center > h4 {
+            margin: 0 auto;
+            text-align: center;
+        width:100px;
+        color:whitesmoke;
+        border: 1px solid #292929;
+        padding:5px;
+        border-radius: 10px;
+        background-color: #292929;
+    }
+</style>

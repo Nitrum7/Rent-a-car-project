@@ -4,9 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Request</h4>
+<div class="text-center">
+    <h1>Create</h1>
+    <h4>Request</h4>
+</div>
+<hr></hr>
 <div class="row d-flex justify-content-center align-items-center h-100">
     <div class="col-lg-8 col-xl-6">
         <div class="card rounded-3" style="background-color:#F0F2F5">
@@ -25,16 +27,27 @@
                         <input asp-for=" EndDate" class="form-control" />
                         <span asp-validation-for=" EndDate" class="text-danger"></span>
                     </div>                    
-                    <button type="submit" class="btn btn-primary">Display</button>
+                    <button id="BTN" type="submit" class="btn btn-warning">Display</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<div>
-    <a asp-action="Index">Back to List</a>
+<div id="BTL" class="text-center">
+    <a class="btn btn-dark" asp-action="Index">Back to List</a>
 </div>
-
+<style>
+    body {
+        margin: auto;
+        background-color: whitesmoke;
+    }
+    #BTL{
+        padding:10px;
+    }
+    #BTN{
+        margin-left:180px;
+    }
+</style>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
